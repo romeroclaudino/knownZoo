@@ -21,7 +21,7 @@ def publish(content):
 
 
 def extrai(rdd):
-    lista = rdd.take(20)
+    lista = rdd.collect()
     print(lista)
     if(len(lista) > 0):
         for item in lista:

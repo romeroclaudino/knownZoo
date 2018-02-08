@@ -21,7 +21,8 @@ byte rnd;
 byte i;
 byte count;
 int maxssids = 1;  /*Quantidade de SSIDS*/
-char *ssids[] = {  "Arara" };
+char *ssids[] = {  "Carcara" };
+//char *ssids[] = {  "Macaco" };
 
 byte wifipkt[128] = {   0x80, 0x00, 0x00, 0x00, 
                 /*4*/   0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 
@@ -41,13 +42,13 @@ byte pktsuffix[] = {    0x01, 0x08, 0x82, 0x84,
 
 WiFiClient espClient;
 
-const char* ssid = "Los_Hipocritas";
-const char* password = "suite009";
+const char* ssid = "TrojanHorse";
+const char* password = "123456789";
 
 PubSubClient client(espClient);
 
-const char* mqtt_server = "192.168.0.114";    //"192.168.43.80";
-const int mqtt_port = 1883; //
+const char* mqtt_server = "192.168.43.80";      //"192.168.43.34";
+const int mqtt_port = 1883;
 
 int contador;
 
@@ -181,7 +182,7 @@ static os_timer_t channelHop_timer;
               break;
             }
             
-            sendMessage("arara_00", macs[i], rssids[i]);
+            sendMessage("2", macs[i], rssids[i]);
         }
         contadorMac = 0;
         for(int i = 0; i < QTD_MACS; i++){
@@ -267,12 +268,19 @@ void setup() {
   Serial.print("Enviando beacons");
   wifi_set_opmode(STATION_MODE);
   wifi_promiscuous_enable(1);
-  wifipkt[10] = wifipkt[16] = 0x12;
-  wifipkt[11] = wifipkt[17] = 0x13;
-  wifipkt[12] = wifipkt[18] = 0x14;
-  wifipkt[13] = wifipkt[19] = 0x15;
+  wifipkt[10] = wifipkt[16] = 0xec;
+  wifipkt[11] = wifipkt[17] = 0x10;
+  wifipkt[12] = wifipkt[18] = 0x12;
+  wifipkt[13] = wifipkt[19] = 0x14;
   wifipkt[14] = wifipkt[20] = 0x09;
-  wifipkt[15] = wifipkt[21] = 0x10;
+  wifipkt[15] = wifipkt[21] = 0x00;
+
+//  wifipkt[10] = wifipkt[16] = 0x12;
+//  wifipkt[11] = wifipkt[17] = 0x13;
+//  wifipkt[12] = wifipkt[18] = 0x14;
+//  wifipkt[13] = wifipkt[19] = 0x15;
+//  wifipkt[14] = wifipkt[20] = 0x09;
+//  wifipkt[15] = wifipkt[21] = 0x10;
   /////////////////BEACON///////////////////////
 
   wifi_promiscuous_enable(DISABLE);
